@@ -11,6 +11,9 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - '2181:2181'
+    volumes:
+      - ./zookeeper_data:/var/lib/zookeeper/data
+      - ./zookeeper_log:/var/lib/zookeeper/log
 
   kafka:
     image: 'confluentinc/cp-kafka:7.7.0'
@@ -29,6 +32,8 @@ services:
     ports:
       - '9092:9092'
       - '19092:19092'
+    volumes:
+        - ./kafka_data:/var/lib/kafka/data
 
   kafka-ui:
     image: 'provectuslabs/kafka-ui:v0.7.2'
@@ -47,7 +52,7 @@ services:
     container_name: minio
     restart: always
     volumes:
-      - ./data:/data
+      - ./s3_data:/data
     environment:
       - MINIO_ROOT_USER=minioadmin
       - MINIO_ROOT_PASSWORD=minioadmin
@@ -55,3 +60,14 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+
+  ch_server:
+    image: clickhouse/clickhouse-server:25.12
+    container_name: click_house
+    ports:
+      - "8123:8123"
+    environment:
+      CLICKHOUSE_USER: click
+      CLICKHOUSE_PASSWORD: click
+    volumes:
+      - ./clickhouse_data:/var/lib/clickhouse

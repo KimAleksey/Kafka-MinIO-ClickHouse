@@ -16,8 +16,8 @@ logging.basicConfig(
 
 # MinIO параметры.
 STORAGE_OPTIONS = {
-    "key": "6yNqhb70NGHykaRP5KeM",
-    "secret": "Yw7DyDbWZftnQK3BzOUeI9d0L9GrVvvjp6eNQRST",
+    "key": "FGewAOG3bIf6eGiIuC2u",
+    "secret": "5XhWPmq8holaejbdqpM6eZ4bjyA0zn9lYKw5acrb",
     "client_kwargs": {"endpoint_url": "http://localhost:9000"},
 }
 BUCKET_NAME = "my-bucket"
@@ -67,7 +67,7 @@ def consume_message(
     # Конфигурация Consumer
     conf = {
         "bootstrap.servers": "localhost:19092",
-        "group.id": "anothergroup",
+        "group.id": "s3",
         "auto.offset.reset": "earliest",
     }
 

@@ -57,3 +57,43 @@ mygroupcli      my_topic        0          182             190             8
 ```
 
 Для выхода из интерактивного режима - ctrl + c.
+
+
+## Скрипт для создания таблиц в ClickHouse
+
+```sql
+DROP TABLE IF EXISTS kafka_users_consumer;
+DROP TABLE IF EXISTS kafka_users_phys_table;
+DROP TABLE IF EXISTS kafka_users_mat_view;
+
+CREATE TABLE kafka_users_consumer
+(
+    user_id String,
+    created_at String,
+    username String,
+    password String,
+    email String,
+    first_name String,
+    last_name String
+) ENGINE = Kafka SETTINGS
+    kafka_broker_list = 'kafka',
+    kafka_topic_list = 'my_topic',
+    kafka_group_name = 'clickhouse',
+    kafka_format = 'JSON';
+    
+CREATE TABLE kafka_users_phys_table
+(
+    user_id String,
+    created_at String,
+    username String,
+    password String,
+    email String,
+    first_name String,
+    last_name String
+)
+ENGINE = MergeTree()
+ORDER BY (user_id);
+
+CREATE MATERIALIZED VIEW kafka_users_mat_view TO kafka_users_phys_table 
+    AS SELECT * FROM kafka_users_consumer;
+```

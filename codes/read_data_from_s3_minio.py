@@ -10,8 +10,8 @@ logging.basicConfig(
 )
 
 STORAGE_OPTIONS = {
-    "aws_access_key_id": "6yNqhb70NGHykaRP5KeM",
-    "aws_secret_access_key": "Yw7DyDbWZftnQK3BzOUeI9d0L9GrVvvjp6eNQRST",
+    "aws_access_key_id": "FGewAOG3bIf6eGiIuC2u",
+    "aws_secret_access_key": "5XhWPmq8holaejbdqpM6eZ4bjyA0zn9lYKw5acrb",
     "endpoint_url": "http://localhost:9000",
 }
 
