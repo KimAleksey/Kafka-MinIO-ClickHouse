@@ -18,7 +18,7 @@ logging.basicConfig(
 STORAGE_OPTIONS = {
     "key": "FGewAOG3bIf6eGiIuC2u",
     "secret": "5XhWPmq8holaejbdqpM6eZ4bjyA0zn9lYKw5acrb",
-    "client_kwargs": {"endpoint_url": "http://localhost:9000"},
+    "client_kwargs": {"endpoint_url": "http://minio:9000"},
 }
 BUCKET_NAME = "my-bucket"
 BATCH_SIZE = 100
@@ -66,7 +66,7 @@ def consume_message(
 
     # Конфигурация Consumer
     conf = {
-        "bootstrap.servers": "localhost:19092",
+        "bootstrap.servers": "kafka:9092",
         "group.id": "s3",
         "auto.offset.reset": "earliest",
     }

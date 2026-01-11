@@ -1,0 +1,28 @@
+# Python cache
+__pycache__/
+*.py[co]
+
+# Build artifacts
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environment
+.venv
+
+# IDE / metadata
+.idea/
+.DS_Store
+.git
+.gitignore
+pyproject.toml
+uv.lock
+
+# Data / volumes (не нужны в контейнере)
+data/
+kafka_data/
+clickhouse_data/
+zookeeper_data/
+zookeeper_log/
+s3_data/

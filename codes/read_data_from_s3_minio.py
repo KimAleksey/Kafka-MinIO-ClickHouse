@@ -12,7 +12,7 @@ logging.basicConfig(
 STORAGE_OPTIONS = {
     "aws_access_key_id": "FGewAOG3bIf6eGiIuC2u",
     "aws_secret_access_key": "5XhWPmq8holaejbdqpM6eZ4bjyA0zn9lYKw5acrb",
-    "endpoint_url": "http://localhost:9000",
+    "endpoint_url": "http://minio:9000",
 }
 
 def read_data_from_s3(bucket_name: str | None = "my-bucket", filename: str | None = None) -> pd.DataFrame:

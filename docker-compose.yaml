@@ -71,3 +71,11 @@ services:
       CLICKHOUSE_PASSWORD: click
     volumes:
       - ./clickhouse_data:/var/lib/clickhouse
+
+  python-app:
+    build: .
+    container_name: python_app
+    depends_on:
+      - kafka
+      - minio
+      - ch_server

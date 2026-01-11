@@ -13,7 +13,10 @@ logging.basicConfig(
 )
 
 # Определяем конфигурацию Kafka Producer
-conf = {"bootstrap.servers": "localhost:19092"}
+conf = {
+    "bootstrap.servers": "kafka:9092",
+    "client.dns.lookup": "use_all_dns_ips",
+}
 
 # Создание экземпляр Producer с вышеупомянутыми настройками
 producer = Producer(conf)

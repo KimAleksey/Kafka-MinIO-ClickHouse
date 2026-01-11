@@ -21,7 +21,7 @@ def consume_message(topic: str | None = None, offset: int | None = None) -> None
 
     # Конфигурация Consumer
     conf = {
-        "bootstrap.servers": "localhost:19092",
+        "bootstrap.servers": "kafka:9092",
         "group.id": "mygroup",
         "auto.offset.reset": "earliest",
     }
