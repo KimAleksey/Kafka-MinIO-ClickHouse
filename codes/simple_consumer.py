@@ -1,5 +1,5 @@
+import json
 import logging
-from turtledemo.sorting_animate import partition
 
 from confluent_kafka import Consumer, KafkaError, TopicPartition
 
@@ -49,11 +49,16 @@ def consume_message(topic: str | None = None, offset: int | None = None) -> None
                 continue
             if msg.error():
                 if msg.error().code() == KafkaError:
-                    print("Reached end of partition.")
+                    logging.error("Reached end of partition.")
                 else:
-                    print(f"Error: {msg.error()}")
+                    logging.error(f"Error: {msg.error()}")
             else:
-                print(f"Received message {msg.value().decode('utf-8')}")
+                try:
+                    raw = msg.value().decode("utf-8")
+                    obj = json.loads(raw)
+                    logging.info(f"Received message {obj}")
+                except Exception as e:
+                    logging.error(f"Error: {e}")
     except KeyboardInterrupt:
         pass
     finally:
@@ -62,7 +67,7 @@ def consume_message(topic: str | None = None, offset: int | None = None) -> None
 
 if __name__ == "__main__":
     # Читаем с начала
-    consume_message("my_topic")
+    # consume_message("my_topic")
 
     # Читаем с определенного оффсета
-    # consume_message(topic="my_topic", offset=5)
+    consume_message(topic="my_topic", offset=5)
