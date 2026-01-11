@@ -11,7 +11,7 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
 )
 
-# Определяем конфигурацию Kafka
+# Определяем конфигурацию Kafka Producer
 conf = {"bootstrap.servers": "localhost:19092"}
 
 # Создание экземпляр Producer с вышеупомянутыми настройками
@@ -23,7 +23,7 @@ interval = 1.0 / 1
 
 def write_to_kafka() -> None:
     """
-    С заданным интервалом отправляет сообщение в топик.
+    С заданным интервалом отправляет сообщение в topic.
     Сообщение содержит информацию о новом пользователе, которое было сгенерировано в отдельной функции.
 
     :return: None.
@@ -52,5 +52,8 @@ def write_to_kafka() -> None:
 
 
 if __name__ == "__main__":
-    for _ in range(10):
-        write_to_kafka()
+    try:
+        while True:
+            write_to_kafka()
+    except KeyboardInterrupt:
+        pass
