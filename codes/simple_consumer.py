@@ -62,7 +62,7 @@ def consume_message(topic: str | None = None, offset: int | None = None) -> None
 
 if __name__ == "__main__":
     # Читаем с начала
-    # consume_message("my_topic")
+    consume_message("my_topic")
 
     # Читаем с определенного оффсета
-    consume_message(topic="my_topic", offset=5)
+    # consume_message(topic="my_topic", offset=5)
