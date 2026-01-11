@@ -100,9 +100,8 @@ def consume_message(
                     logging.error(f"Error: {msg.error()}")
             else:
                 try:
-                    event = msg.value().decode("utf-8")
-                    obj = json.loads(event)
-                    logging.info(f"Received message {obj}")
+                    event = json.loads(msg.value().decode("utf-8"))
+                    logging.info(f"Получено сообщение {event}")
                 except Exception as e:
                     logging.error(e)
                     continue
