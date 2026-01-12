@@ -21,7 +21,7 @@ STORAGE_OPTIONS = {
     "client_kwargs": {"endpoint_url": "http://minio:9000"},
 }
 BUCKET_NAME = "my-bucket"
-BATCH_SIZE = 100
+BATCH_SIZE = 10000
 
 
 def write_to_s3_minio(batch: list[dict[Any, Any]]) -> None:

@@ -22,7 +22,7 @@ conf = {
 producer = Producer(conf)
 
 # RPS - интервал, с которым будут отправляться сообщения
-interval = 1.0 / 1
+interval = 1.0 / 1000
 
 
 def write_to_kafka(stop_event: threading.Event | None = None) -> None:
