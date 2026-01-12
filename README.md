@@ -72,14 +72,7 @@ docker compose up -d
 2. Создать  topic - my_topic.
 3. Убедиться что в топик идет запись сообщений.
 
-### Работа с S3-MinIO
-
-1. Перейти в http://localhost:9000/.
-2. Создать access_key, secret_key.
-3. Создать bucket my-bucket.
-4. Убедиться, что в bucket загружаются файлы в формате parquet.
-
-## Запись в topic с помощью CLI
+#### Запись в topic с помощью CLI
 
 ```bash
 docker exec -it kafka kafka-console-producer \
@@ -89,9 +82,9 @@ docker exec -it kafka kafka-console-producer \
 
 Для выхода из интерактивного режима - ctrl + c.
 
-## Считывание сообщений из topic с помощью CLI
+#### Считывание сообщений из topic с помощью CLI
 
-### Просмотр сообщений "Без группы" с самого начала:
+##### Просмотр сообщений "Без группы" с самого начала:
 
 ```bash
 docker exec -it kafka kafka-console-consumer \
@@ -100,7 +93,7 @@ docker exec -it kafka kafka-console-consumer \
   --from-beginning
 ```
 
-### Просмотр сообщений "Только новые":
+##### Просмотр сообщений "Только новые":
 
 ```bash
 docker exec -it kafka kafka-console-consumer \
@@ -108,7 +101,7 @@ docker exec -it kafka kafka-console-consumer \
   --topic my_topic
 ```
 
-### Просмотр сообщений "Новые не прочитанные":
+##### Просмотр сообщений "Новые не прочитанные":
 
 ```bash
 docker exec -it kafka kafka-console-consumer \
@@ -121,7 +114,7 @@ docker exec -it kafka kafka-console-consumer \
 Processed a total of 39 messages
 ```
 
-### Прочитанные строки фиксируются в Kafka и мы можем это проверить командой:
+##### Прочитанные строки фиксируются в Kafka и мы можем это проверить командой:
 
 ```bash
 docker exec -it kafka kafka-consumer-groups \
@@ -137,8 +130,16 @@ mygroupcli      my_topic        0          182             190             8
 
 Для выхода из интерактивного режима - ctrl + c.
 
+### Работа с S3-MinIO
 
-## Скрипт для создания таблиц в ClickHouse
+1. Перейти в http://localhost:9000/.
+2. Создать access_key, secret_key.
+3. Создать bucket my-bucket.
+4. Убедиться, что в bucket загружаются файлы в формате parquet.
+
+### Работа с ClickHouse
+
+Выполнить DDL запрос ниже.
 
 ```sql
 DROP TABLE IF EXISTS kafka_users_consumer;
@@ -168,7 +169,8 @@ CREATE TABLE kafka_users_phys_table
     password String,
     email String,
     first_name String,
-    last_name String
+    last_name String,
+    loaded_at DateTime DEFAULT now()
 )
 ENGINE = MergeTree()
 ORDER BY (user_id);
