@@ -55,12 +55,12 @@ def consume_message(
         batch_size: int | None = BATCH_SIZE
 ) -> None:
     """
-    Функция считывает сообщения из топика с заданным оффсетом и выводит считанное сообщение в консоль.
+    Функция считывает сообщения из topic с заданным offset и выводит считанное сообщение в консоль.
 
     :param stop_event: Внешний stop_event.
     :param batch_size: Размер пакета.
     :param topic: Имя топика.
-    :param offset: Оффсет.
+    :param offset: Offset.
     :return: None.
     """
 
@@ -81,10 +81,10 @@ def consume_message(
         # Получаем список партиций топика.
         partitions = consumer.list_topics(topic).topics[topic].partitions
         for partition in partitions:
-            # Ручное назначение топика, партиции и оффсета.
+            # Ручное назначение топика, партиции и offset.
             consumer.assign([TopicPartition(topic, partition, offset)])
     else:
-        # Обычная подписка на топик.
+        # Обычная подписка на topic.
         consumer.subscribe([topic])
 
     batch = []
